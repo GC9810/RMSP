@@ -4,7 +4,7 @@
 // @version      1.0
 // @description  Mod for RMS entry
 // @author       You
-// @match        https://rms.pason.com/Pages/Components/ComponentAdd.aspx?componentTemplate=*
+// @match        
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @grant        none
 // ==/UserScript==
