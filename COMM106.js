@@ -1,10 +1,10 @@
 // ==UserScript==
-// @name         RMS Mod
+// @name         RMS Mod (For COMM106)
 // @namespace    http://tampermonkey.net/
 // @version      1.0
 // @description  Mod for RMS entry
 // @author       You
-// @match        
+// @match        https://rms.pason.com/Pages/Components/ComponentAdd.aspx?componentTemplate=*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @grant        none
 // ==/UserScript==
@@ -20,6 +20,7 @@
         let country = document.getElementById("ctl00_ProgessIndicationPageBodyContent_CountryDropDownList")
         let barcode = document.getElementById("ctl00_ProgessIndicationPageBodyContent_BarcodeTextBox")
         let sn = document.getElementById("ctl00_ProgessIndicationPageBodyContent_Properties_PropertyRepeater_ctl03_TextProperty")
+        let add_btn = document.getElementById("ctl00_ProgessIndicationPageBodyContent_TopAddItemButton")
 
         //check the revision checkbox (1-4)
         for (let x = 0; x < 4; x++) {
@@ -38,6 +39,7 @@
         barcode.tabIndex = 1
         ethernet.tabIndex = 2
         sn.tabIndex = 3
+        add_btn.tabIndex = 4
         barcode.focus();
     });
 })();
