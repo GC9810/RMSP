@@ -23,5 +23,14 @@
                 link.click();
             }
         });
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key.toLowerCase() === 'c') {
+                let changebtn = document.getElementById('ctl00_ProgessIndicationPageBodyContent_ConfirmChangesButton');
+                if (changebtn) {
+                    changebtn.focus();
+                }
+            }
+        });
     });
 })();
