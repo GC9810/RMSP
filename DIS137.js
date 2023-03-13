@@ -12,7 +12,7 @@
     'use strict';
 
     window.addEventListener('load', function() {
-        let input = document.getElementById("ctl00_ProgessIndicationPageBodyContent_UpdatedComponentProperties_PropertyRepeater_ctl01_TextProperty");
+        let input = document.getElementById("ctl00_ProgessIndicationPageBodyContent_UpdatedComponentProperties_PropertyRepeater_ctl00_TextProperty");
         if (input) {
             input.select();
             input.focus();
