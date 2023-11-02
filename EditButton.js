@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         Add Additional Button
+// @name         Add Additional Buttons
 // @namespace    http://tampermonkey.net/
-// @version      0.1
-// @description  Add an additional button to the RMS - Ensure that pop-up blockers are disabled for the site to allow multiple tabs to open.
+// @version      0.3
+// @description  Add additional buttons to the RMS - Part Updates page
 // @author       You
 // @match        *://rms.pason.com/pages/Components/ComponentEditMultiple.aspx*
 // @grant        none
@@ -11,31 +11,50 @@
 (function() {
     'use strict';
 
-    // Create a new button element
-    let newButton = document.createElement('a');
-    newButton.id = "newButton";
-    newButton.className = "formLinkButton"; // Use the same class as the other buttons for styling
-    newButton.href = "#"; // Set href to "#" or to the desired URL
-    newButton.innerText = "Edit in Tab"; // Button label
-
-    // Functionality to get the textbox values and open new tabs
-    newButton.onclick = function(event) {
-        event.preventDefault();
-
+    function openTabs(baseURL) {
         let textbox = document.getElementById('ctl00_PageBodyContent_ManualBarcodeEntry_CustomBarcodesTextBox');
         let values = textbox.value.split('\n');
 
         for (let i = 0; i < values.length; i++) {
             if (values[i].trim() !== "") { // Check for non-empty values
-                window.open('https://rms.pason.com/pages/Components/ComponentEdit.aspx?id=' + values[i].trim(), '_blank');
+                window.open(baseURL + values[i].trim(), '_blank');
             }
         }
+    }
+
+    // Create the "Edit in Tab" button
+    let editButton = document.createElement('a');
+    editButton.id = "editButton";
+    editButton.className = "formLinkButton";
+    editButton.href = "#";
+    editButton.innerText = "Edit in Tab";
+    editButton.style.marginRight = "10px";  // Add a margin to the right side
+    editButton.onclick = function(event) {
+        event.preventDefault();
+        openTabs('https://rms.pason.com/pages/Components/ComponentEdit.aspx?id=');
     };
 
-    // Add a margin to the right side of the new button
-    newButton.style.marginRight = "10px";
+    // Create the "View in Tab" button
+    let viewButton = document.createElement('a');
+    viewButton.id = "viewButton";
+    viewButton.className = "formLinkButton";
+    viewButton.href = "#";
+    viewButton.innerText = "View in Tab";
+    viewButton.style.marginRight = "10px";  // Add a margin to the right side
+    viewButton.onclick = function(event) {
+        event.preventDefault();
+        openTabs('https://rms.pason.com/pages/Components/ComponentDetails.aspx?id=');
+    };
 
-    // Insert the new button next to the "Continue" button
+    // Insert the new buttons next to the "Continue" button
     let referenceButton = document.getElementById('ctl00_PageBodyContent_ChooseBarcodesButton');
-    referenceButton.parentNode.insertBefore(newButton, referenceButton.nextSibling);
+    referenceButton.parentNode.insertBefore(editButton, referenceButton.nextSibling);
+    referenceButton.parentNode.insertBefore(viewButton, editButton.nextSibling);
+
+    // Make the textbox resizable
+    let textbox = document.getElementById('ctl00_PageBodyContent_ManualBarcodeEntry_CustomBarcodesTextBox');
+    textbox.style.resize = "vertical";
+    textbox.style.overflow = "auto";
+
+
 })();
